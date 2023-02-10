@@ -25,7 +25,7 @@ class Feedback extends Component {
           >
             { assertions }
           </p>
-         </label>
+        </label>
       </div>
     );
   }
