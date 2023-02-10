@@ -13,8 +13,19 @@ class Feedback extends Component {
     return (
       <div>
         <p data-testid="feedback-text">{ this.message(assertions) }</p>
-        <p data-testid="feedback-total-score">{ score }</p>
-        <p data-testid="feedback-total-question">{ assertions }</p>
+        <label htmlFor="score">
+          Pontuação:
+          <p data-testid="feedback-total-score" name="score">{ score }</p>
+        </label>
+        <label htmlFor="number-correct">
+          Número de acertos:
+          <p
+            data-testid="feedback-total-question"
+            name="number-correct"
+          >
+            { assertions }
+          </p>
+        </label>
       </div>
     );
   }
