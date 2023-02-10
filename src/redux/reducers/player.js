@@ -8,10 +8,15 @@ const INITIAL_STATE = {
 };
 
 const player = (state = INITIAL_STATE, action) => {
-  const email = action.payload;
+  // const { email, name, score } = action.payload;
   switch (action.type) {
   case LOGIN:
-    return { ...state, email };
+    return {
+      ...state,
+      gravatarEmail: action.payload.email,
+      name: action.payload.name,
+      score: action.payload.score,
+    };
   default:
     return state;
   }
