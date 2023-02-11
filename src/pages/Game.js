@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Timer from '../components/Timer';
 
 class Game extends Component {
   state = {
@@ -9,6 +10,7 @@ class Game extends Component {
     questions: [],
     currentQuestion: 0,
     correctAnswer: '',
+    // timer: 30,
   };
 
   componentDidMount() {
@@ -46,6 +48,23 @@ class Game extends Component {
     }
   };
 
+  // handleCountDown = () => {
+  //   const maxTime = 30;
+  //   const [seconds, setSeconds] = useState(maxTime);
+  //   const oneSecond = 1000;
+  //   useEffect(() => {
+  //     const countdown = setInterval(() => {
+  //       if (seconds === 0) {
+  //         clearInterval(countdown);
+  //       }
+  //       setSeconds(seconds - 1);
+  //     }, oneSecond);
+  //     return () => clearInterval(countdown);
+  //   }, [seconds]);
+
+  //   return seconds;
+  // };
+
   handleCorrectAnswer = () => {
     const { questions, currentQuestion } = this.state;
     this.setState({
@@ -55,6 +74,7 @@ class Game extends Component {
 
   render() {
     const { questions, currentQuestion, correctAnswer } = this.state;
+    const { timeIsOver } = this.props;
     let counter = 0;
     let dataID = '';
     let answers = [];
@@ -71,6 +91,7 @@ class Game extends Component {
         <div>
           <Header />
           <main>
+            <Timer />
             <h5 data-testid="question-text">{questions[currentQuestion].question}</h5>
             <h5 data-testid="question-category">{questions[currentQuestion].category}</h5>
             <section data-testid="answer-options">
@@ -86,6 +107,7 @@ class Game extends Component {
                   <button
                     key={ index }
                     type="button"
+                    disabled={ timeIsOver }
                     data-testid={ dataID }
                   >
                     {answer}
@@ -102,10 +124,15 @@ class Game extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  timeIsOver: state.timer.timeIsOver,
+});
+
 Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  timeIsOver: PropTypes.bool.isRequired,
 };
 
-export default connect()(Game);
+export default connect(mapStateToProps)(Game);
