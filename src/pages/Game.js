@@ -49,7 +49,7 @@ class Game extends Component {
       }, () => { this.handleCorrectAnswer(); });
     }
   };
-  
+
   clickedAnswer = () => {
     this.setState({
       clickedAnswer: true,
