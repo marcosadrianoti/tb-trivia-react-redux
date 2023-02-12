@@ -1,3 +1,4 @@
 const LOGIN = 'LOGIN';
+const TIMEOUT = 'TIMEOUT';
 
-export { LOGIN };
+export { LOGIN, TIMEOUT };
