@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
+import '../styles/Game.css';
 
 class Game extends Component {
   state = {
@@ -10,7 +11,7 @@ class Game extends Component {
     questions: [],
     currentQuestion: 0,
     correctAnswer: '',
-    // timer: 30,
+    clickedAnswer: false,
   };
 
   componentDidMount() {
@@ -42,28 +43,18 @@ class Game extends Component {
     if (currentQuestion + 1 === maxQuestions) {
       history.push('/feedback');
     } else {
-      this.setState({ currentQuestion: currentQuestion + 1 }, () => {
-        this.handleCorrectAnswer();
-      });
+      this.setState({
+        currentQuestion: currentQuestion + 1,
+        clickedAnswer: false,
+      }, () => { this.handleCorrectAnswer(); });
     }
   };
-
-  // handleCountDown = () => {
-  //   const maxTime = 30;
-  //   const [seconds, setSeconds] = useState(maxTime);
-  //   const oneSecond = 1000;
-  //   useEffect(() => {
-  //     const countdown = setInterval(() => {
-  //       if (seconds === 0) {
-  //         clearInterval(countdown);
-  //       }
-  //       setSeconds(seconds - 1);
-  //     }, oneSecond);
-  //     return () => clearInterval(countdown);
-  //   }, [seconds]);
-
-  //   return seconds;
-  // };
+  
+  clickedAnswer = () => {
+    this.setState({
+      clickedAnswer: true,
+    });
+  };
 
   handleCorrectAnswer = () => {
     const { questions, currentQuestion } = this.state;
@@ -73,17 +64,24 @@ class Game extends Component {
   };
 
   render() {
-    const { questions, currentQuestion, correctAnswer } = this.state;
+    const { questions, currentQuestion, correctAnswer, clickedAnswer } = this.state;
     const { timeIsOver } = this.props;
     let counter = 0;
     let dataID = '';
     let answers = [];
+    let shuffledAnswers = [];
     if (questions.length >= 1) {
       answers = [
         questions[currentQuestion].correct_answer,
         ...questions[currentQuestion].incorrect_answers];
       const randonator = 0.5;
-      answers.sort(() => Math.random() - randonator);
+      if (clickedAnswer === false) { // Só deve randomizar uma vez e não cada vez que for renderizado.
+        answers.sort(() => Math.random() - randonator);
+        shuffledAnswers = answers;
+        localStorage.setItem('shuffledAnswers', JSON.stringify(shuffledAnswers));
+      } else {
+        answers = JSON.parse(localStorage.getItem('shuffledAnswers'));
+      }
     }
     return (
 
@@ -95,7 +93,7 @@ class Game extends Component {
             <h5 data-testid="question-text">{questions[currentQuestion].question}</h5>
             <h5 data-testid="question-category">{questions[currentQuestion].category}</h5>
             <section data-testid="answer-options">
-              {answers.map((answer, index) => {
+              { answers.map((answer, index) => {
                 if (answer === correctAnswer) {
                   dataID = 'correct-answer';
                 } else {
@@ -108,7 +106,10 @@ class Game extends Component {
                     key={ index }
                     type="button"
                     disabled={ timeIsOver }
+                    className={ clickedAnswer ? dataID.split('-')[0] : '' }
                     data-testid={ dataID }
+                    onClick={ this.clickedAnswer }
+
                   >
                     {answer}
                   </button>
