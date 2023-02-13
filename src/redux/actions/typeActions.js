@@ -2,5 +2,6 @@ const LOGIN = 'LOGIN';
 const TIMEOUT = 'TIMEOUT';
 const TIME = 'TIME';
 const SCORE = 'SCORE';
+const CLICKED_ANSWER = 'CLICKED_ANSWER';
 
-export { LOGIN, TIMEOUT, TIME, SCORE };
+export { LOGIN, TIMEOUT, TIME, SCORE, CLICKED_ANSWER };
