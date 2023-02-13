@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
 import '../styles/Game.css';
-import { SaveScore } from '../redux/actions';
+import { SaveScore, ClickedAnswer, TimeIsOver } from '../redux/actions';
 
 class Game extends Component {
   state = {
@@ -13,7 +13,6 @@ class Game extends Component {
     currentQuestion: 0,
     correctAnswer: '',
     difficulty: '',
-    clickedAnswer: false,
   };
 
   componentDidMount() {
@@ -39,17 +38,18 @@ class Game extends Component {
     });
   };
 
-  handleClick = () => {
+  handleNext = () => {
     const { currentQuestion, questions } = this.state;
+    const { clickedAnswerFunc, history, timeOver } = this.props;
     const maxQuestions = questions.length;
-    const { history } = this.props;
     if (currentQuestion + 1 === maxQuestions) {
       history.push('/feedback');
     } else {
+      clickedAnswerFunc(false);
       this.setState({
         currentQuestion: currentQuestion + 1,
-        clickedAnswer: false,
       }, () => {
+        timeOver(false);
         this.handleCorrectAnswer();
         this.shuffleAnswers();
       });
@@ -59,34 +59,31 @@ class Game extends Component {
   clickedAnswer = ({ target }) => {
     const answer = target.innerText;
     console.log(answer);
-    this.setState({
-      clickedAnswer: true,
-    }, () => {
-      const { correctAnswer } = this.state;
-      const { saveScore } = this.props;
-      if (answer === correctAnswer) {
-        const { difficulty } = this.state;
-        const { time, player: { score } } = this.props;
-        const basePontuation = 10;
-        const hardPontuation = 3;
-        const mediumPontuation = 2;
-        const easyPontuation = 1;
-        let difficultValue = 0;
-        if (difficulty === 'hard') {
-          difficultValue = hardPontuation;
-        }
-        if (difficulty === 'medium') {
-          difficultValue = mediumPontuation;
-        }
-        if (difficulty === 'easy') {
-          difficultValue = easyPontuation;
-        }
-
-        const scoreToAdd = basePontuation + (time * difficultValue);
-        const newScore = score + scoreToAdd;
-        saveScore(newScore);
+    const { correctAnswer } = this.state;
+    const { saveScore, clickedAnswerFunc } = this.props;
+    clickedAnswerFunc(true);
+    if (answer === correctAnswer) {
+      const { difficulty } = this.state;
+      const { time, player: { score } } = this.props;
+      const basePontuation = 10;
+      const hardPontuation = 3;
+      const mediumPontuation = 2;
+      const easyPontuation = 1;
+      let difficultValue = 0;
+      if (difficulty === 'hard') {
+        difficultValue = hardPontuation;
       }
-    });
+      if (difficulty === 'medium') {
+        difficultValue = mediumPontuation;
+      }
+      if (difficulty === 'easy') {
+        difficultValue = easyPontuation;
+      }
+
+      const scoreToAdd = basePontuation + (time * difficultValue);
+      const newScore = score + scoreToAdd;
+      saveScore(newScore);
+    }
   };
 
   handleCorrectAnswer = () => {
@@ -113,26 +110,11 @@ class Game extends Component {
   };
 
   render() {
-    const { questions, currentQuestion, correctAnswer, clickedAnswer } = this.state;
+    const { questions, currentQuestion, correctAnswer } = this.state;
     const answers = JSON.parse(localStorage.getItem('shuffledAnswers'));
-    const { timeIsOver } = this.props;
+    const { timeIsOver, clickedAnswer } = this.props;
     let counter = 0;
     let dataID = '';
-    // let answers = [];
-    // let shuffledAnswers = [];
-    // if (questions.length >= 1) {
-    //   answers = [
-    //     questions[currentQuestion].correct_answer,
-    //     ...questions[currentQuestion].incorrect_answers];
-    //   const randonator = 0.5;
-    //   if (clickedAnswer === false) { // Só deve randomizar uma vez e não cada vez que for renderizado.
-    //     answers.sort(() => Math.random() - randonator);
-    //     shuffledAnswers = answers;
-    //     localStorage.setItem('shuffledAnswers', JSON.stringify(shuffledAnswers));
-    //   } else {
-    //     answers = JSON.parse(localStorage.getItem('shuffledAnswers'));
-    //   }
-    // }
     return (
 
       answers && (
@@ -157,25 +139,29 @@ class Game extends Component {
                       key={ index }
                       type="button"
                       disabled={ timeIsOver }
-                      className={ clickedAnswer ? dataID.split('-')[0] : '' }
+                      className={ (clickedAnswer || timeIsOver)
+                        ? dataID.split('-')[0] : '' }
                       data-testid={ dataID }
                       onClick={ this.clickedAnswer }
-
                     >
                       {answer}
                     </button>
                   );
                 })
-                // )
               }
             </section>
-            <button
-              type="button"
-              data-testid="btn-next"
-              onClick={ this.handleClick }
-            >
-              Next
-            </button>
+            {
+              (clickedAnswer || timeIsOver)
+              && (
+                <button
+                  type="button"
+                  data-testid="btn-next"
+                  onClick={ this.handleNext }
+                >
+                  Next
+                </button>
+              )
+            }
           </main>
         </div>
       )
@@ -186,12 +172,15 @@ class Game extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   saveScore: (payload) => dispatch(SaveScore(payload)),
+  clickedAnswerFunc: (payload) => dispatch(ClickedAnswer(payload)),
+  timeOver: (payload) => dispatch(TimeIsOver(payload)),
 });
 
 const mapStateToProps = (state) => ({
   timeIsOver: state.timer.timeIsOver,
   time: state.timer.time,
   player: state.player,
+  clickedAnswer: state.answer.clickedAnswer,
 });
 
 Game.propTypes = {
@@ -204,6 +193,9 @@ Game.propTypes = {
   timeIsOver: PropTypes.bool.isRequired,
   time: PropTypes.number.isRequired,
   saveScore: PropTypes.func.isRequired,
+  clickedAnswerFunc: PropTypes.func.isRequired,
+  timeOver: PropTypes.func.isRequired,
+  clickedAnswer: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

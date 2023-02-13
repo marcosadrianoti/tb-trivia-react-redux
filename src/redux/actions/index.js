@@ -1,4 +1,4 @@
-import { LOGIN, TIMEOUT, TIME, SCORE } from './typeActions';
+import { LOGIN, TIMEOUT, TIME, SCORE, CLICKED_ANSWER } from './typeActions';
 
 export const LoginAct = (payload) => ({
   type: LOGIN,
@@ -17,5 +17,10 @@ export const GetTime = (payload) => ({
 
 export const SaveScore = (payload) => ({
   type: SCORE,
+  payload,
+});
+
+export const ClickedAnswer = (payload) => ({
+  type: CLICKED_ANSWER,
   payload,
 });
