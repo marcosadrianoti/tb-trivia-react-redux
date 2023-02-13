@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { TimeIsOver } from '../redux/actions';
+import { TimeIsOver, GetTime } from '../redux/actions';
 
 class Timer extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Timer extends Component {
 
   componentDidMount() {
     const oneSecond = 1000;
-    const { timeOver } = this.props;
+    const { timeOver, time } = this.props;
     this.countdown = setInterval(() => {
       this.setState((state) => {
         if (state.seconds === 0) {
@@ -27,6 +27,9 @@ class Timer extends Component {
         return {
           seconds: state.seconds - 1,
         };
+      }, () => {
+        const { seconds } = this.state;
+        time(seconds);
       });
     }, oneSecond);
   }
@@ -50,10 +53,12 @@ class Timer extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   timeOver: (payload) => dispatch(TimeIsOver(payload)),
+  time: (payload) => dispatch(GetTime(payload)),
 });
 
 Timer.propTypes = {
   timeOver: PropTypes.func.isRequired,
+  time: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Timer);

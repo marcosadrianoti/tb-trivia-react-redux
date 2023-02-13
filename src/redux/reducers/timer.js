@@ -1,16 +1,22 @@
-import { TIMEOUT } from '../actions/typeActions';
+import { TIMEOUT, TIME } from '../actions/typeActions';
 
 const INITIAL_STATE = {
   timeIsOver: false,
+  time: 30,
 };
 
 const timer = (state = INITIAL_STATE, action) => {
-  // const { email, name, score } = action.payload;
   switch (action.type) {
   case TIMEOUT:
     return {
       ...state,
       timeIsOver: action.payload,
+      time: 0,
+    };
+  case TIME:
+    return {
+      ...state,
+      time: action.payload,
     };
   default:
     return state;
