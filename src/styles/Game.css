@@ -1,3 +1,8 @@
+/* .correct,
+.wrong {
+  box-sizing: border-box;
+} */
+
 .correct {
   border: 3px solid rgb(6, 240, 15);
 }

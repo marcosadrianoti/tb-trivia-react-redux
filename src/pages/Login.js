@@ -11,6 +11,10 @@ class Login extends Component {
     nameValue: '',
   };
 
+  componentDidMount() {
+    window.localStorage.clear();
+  }
+
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({
