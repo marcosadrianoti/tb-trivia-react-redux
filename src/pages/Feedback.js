@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Header from '../components/Header';
 
 class Feedback extends Component {
   message = (assertions) => {
@@ -12,6 +13,7 @@ class Feedback extends Component {
     const { assertions, score } = this.props;
     return (
       <div>
+        <Header />
         <p data-testid="feedback-text">{ this.message(assertions) }</p>
         <label htmlFor="score">
           Pontuação:

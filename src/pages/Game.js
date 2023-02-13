@@ -49,7 +49,10 @@ class Game extends Component {
       this.setState({
         currentQuestion: currentQuestion + 1,
         clickedAnswer: false,
-      }, () => { this.handleCorrectAnswer(); });
+      }, () => {
+        this.handleCorrectAnswer();
+        this.shuffleAnswers();
+      });
     }
   };
 
@@ -112,7 +115,6 @@ class Game extends Component {
   render() {
     const { questions, currentQuestion, correctAnswer, clickedAnswer } = this.state;
     const answers = JSON.parse(localStorage.getItem('shuffledAnswers'));
-    console.log(answers);
     const { timeIsOver } = this.props;
     let counter = 0;
     let dataID = '';
@@ -167,7 +169,13 @@ class Game extends Component {
                 // )
               }
             </section>
-            <button type="button" onClick={ this.handleClick }>Next</button>
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={ this.handleClick }
+            >
+              Next
+            </button>
           </main>
         </div>
       )
