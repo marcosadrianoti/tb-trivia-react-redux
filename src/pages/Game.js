@@ -112,9 +112,7 @@ class Game extends Component {
   render() {
     const { questions, currentQuestion, correctAnswer } = this.state;
     const answers = JSON.parse(localStorage.getItem('shuffledAnswers'));
-    console.log(answers);
     const { timeIsOver, clickedAnswer } = this.props;
-    console.log(clickedAnswer);
     let counter = 0;
     let dataID = '';
     return (
