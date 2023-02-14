@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 class Ranking extends Component {
   render() {
     const { history } = this.props;
-    const ranking = JSON.parse(localStorage.getItem('Ranking'));
-    ranking.sort((a, b) => b.score - a.score);
+    const ranking = JSON.parse(
+      localStorage.getItem('Ranking'),
+    ).sort((a, b) => b.score - a.score);
+
     return (
       <main>
         <h1 data-testid="ranking-title">Ranking</h1>
