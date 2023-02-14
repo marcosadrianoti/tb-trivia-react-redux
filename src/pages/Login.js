@@ -12,7 +12,8 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    window.localStorage.clear();
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('shuffledAnswers');
   }
 
   handleChange = ({ target }) => {

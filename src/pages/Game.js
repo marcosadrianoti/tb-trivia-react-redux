@@ -19,6 +19,10 @@ class Game extends Component {
     this.fetchAPIGame();
   }
 
+  componentWillUnmount() {
+
+  }
+
   fetchAPIGame = async () => {
     const { amount } = this.state;
     const token = localStorage.getItem('token');
@@ -40,9 +44,18 @@ class Game extends Component {
 
   handleNext = () => {
     const { currentQuestion, questions } = this.state;
-    const { clickedAnswerFunc, history, timeOver } = this.props;
+    const { clickedAnswerFunc, history, timeOver, player } = this.props;
     const maxQuestions = questions.length;
     if (currentQuestion + 1 === maxQuestions) {
+      const local = localStorage.getItem('Ranking', JSON.stringify(player));
+      if (local) {
+        const ranking = JSON.parse(local);
+        const newRanking = [...ranking, player];
+        localStorage.setItem('Ranking', JSON.stringify(newRanking));
+      } else {
+        const playerList = [player];
+        localStorage.setItem('Ranking', JSON.stringify(playerList));
+      }
       history.push('/feedback');
     } else {
       clickedAnswerFunc(false);
