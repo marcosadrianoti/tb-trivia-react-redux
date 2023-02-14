@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 import App from "../App";
 import renderWithRuterAndRedux from "./helpers/renderWithRouterAndRedux";
@@ -51,6 +51,4 @@ describe("Testa o componente <Ranking />", () => {
     userEvent.click(btnHome);
     (expect(history.location.pathname).toBe("/"))
   });
-
-
 });
