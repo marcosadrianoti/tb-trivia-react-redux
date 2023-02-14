@@ -11,7 +11,6 @@ const timer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       timeIsOver: action.payload,
-      time: 0,
     };
   case TIME:
     return {

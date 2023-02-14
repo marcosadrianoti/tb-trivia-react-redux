@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Timer from '../components/Timer';
 import '../styles/Game.css';
-import { SaveScore, ClickedAnswer, TimeIsOver } from '../redux/actions';
+import { SaveScore, ClickedAnswer, TimeIsOver, GetTime } from '../redux/actions';
 
 class Game extends Component {
   state = {
@@ -40,7 +40,8 @@ class Game extends Component {
 
   handleNext = () => {
     const { currentQuestion, questions } = this.state;
-    const { clickedAnswerFunc, history, timeOver } = this.props;
+    const { clickedAnswerFunc, history, timeOver, resetTime } = this.props;
+    const INITIAL_TIME = 30;
     const maxQuestions = questions.length;
     if (currentQuestion + 1 === maxQuestions) {
       history.push('/feedback');
@@ -50,6 +51,8 @@ class Game extends Component {
         currentQuestion: currentQuestion + 1,
       }, () => {
         timeOver(false);
+        resetTime(INITIAL_TIME);
+        // resetTimer();
         this.handleCorrectAnswer();
         this.shuffleAnswers();
       });
@@ -58,7 +61,6 @@ class Game extends Component {
 
   clickedAnswer = ({ target }) => {
     const answer = target.innerText;
-    console.log(answer);
     const { correctAnswer } = this.state;
     const { saveScore, clickedAnswerFunc } = this.props;
     clickedAnswerFunc(true);
@@ -174,6 +176,7 @@ const mapDispatchToProps = (dispatch) => ({
   saveScore: (payload) => dispatch(SaveScore(payload)),
   clickedAnswerFunc: (payload) => dispatch(ClickedAnswer(payload)),
   timeOver: (payload) => dispatch(TimeIsOver(payload)),
+  resetTime: (payload) => dispatch(GetTime(payload)),
 });
 
 const mapStateToProps = (state) => ({
@@ -195,6 +198,7 @@ Game.propTypes = {
   saveScore: PropTypes.func.isRequired,
   clickedAnswerFunc: PropTypes.func.isRequired,
   timeOver: PropTypes.func.isRequired,
+  resetTime: PropTypes.func.isRequired,
   clickedAnswer: PropTypes.bool.isRequired,
 };
 
