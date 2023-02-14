@@ -24,8 +24,7 @@ describe("Loading tests", () => {
   });
 
   test("Test configure button", () => {
-    const history = createMemoryHistory();
-    renderWithRouterAndRedux(<Router history={history}><App /></Router>);
+    const { history } = renderWithRouterAndRedux(<App />);
     const configButton = screen.getByTestId("btn-settings");
     expect(configButton).toBeInTheDocument();
     userEvent.click(configButton);
@@ -33,8 +32,7 @@ describe("Loading tests", () => {
   });
 
   test('Test play button', async () => {
-    const history = createMemoryHistory();
-    renderWithRouterAndRedux(<Router history={history}><App /></Router>);
+    const { history } = renderWithRouterAndRedux(<App />);
     const nameInput = screen.getByTestId("input-player-name");
     const emailInput = screen.getByTestId("input-gravatar-email");
     userEvent.type(nameInput, "joestar");
