@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Ranking extends Component {
   render() {
+    const { history } = this.props;
     const ranking = JSON.parse(localStorage.getItem('Ranking'));
     ranking.sort((a, b) => b.score - a.score);
     return (
@@ -18,9 +20,21 @@ class Ranking extends Component {
             </li>
           )) }
         </ol>
+        <button
+          data-testid="btn-go-home"
+          onClick={ () => history.push('/') }
+        >
+          Início
+        </button>
       </main>
     );
   }
 }
+
+Ranking.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default connect()(Ranking);
