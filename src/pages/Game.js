@@ -75,7 +75,7 @@ class Game extends Component {
     clickedAnswerFunc(true);
     if (answer === correctAnswer) {
       const { difficulty } = this.state;
-      const { time, player: { score } } = this.props;
+      const { time, player: { score, assertions } } = this.props;
       const basePontuation = 10;
       const hardPontuation = 3;
       const mediumPontuation = 2;
@@ -90,10 +90,10 @@ class Game extends Component {
       if (difficulty === 'easy') {
         difficultValue = easyPontuation;
       }
-
+      const totalAssertions = assertions + 1;
       const scoreToAdd = basePontuation + (time * difficultValue);
       const newScore = score + scoreToAdd;
-      saveScore(newScore);
+      saveScore({ assertions: totalAssertions, score: newScore });
     }
   };
 
@@ -198,6 +198,7 @@ const mapStateToProps = (state) => ({
 Game.propTypes = {
   player: PropTypes.shape({
     score: PropTypes.number.isRequired,
+    assertions: PropTypes.number.isRequired,
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
