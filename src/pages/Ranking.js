@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import md5 from 'crypto-js/md5';
 
 class Ranking extends Component {
   render() {
@@ -9,7 +7,7 @@ class Ranking extends Component {
     ranking.sort((a, b) => b.score - a.score);
     return (
       <main>
-        <h1>Ranking</h1>
+        <h1 data-testid="ranking-title">Ranking</h1>
         <ol>
           { ranking.map((player, index) => (
             <li key={ index }>
