@@ -19,10 +19,6 @@ class Game extends Component {
     this.fetchAPIGame();
   }
 
-  componentWillUnmount() {
-
-  }
-
   fetchAPIGame = async () => {
     const { amount } = this.state;
     const token = localStorage.getItem('token');
