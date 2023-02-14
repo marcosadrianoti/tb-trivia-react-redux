@@ -32,7 +32,7 @@ class Header extends Component {
         </label>
         <label htmlFor="score" className="label-row">
           Score:
-          <p data-testid="header-score" name="score">{score}</p>
+          <p data-testid="header-score" name="score">{ score }</p>
         </label>
       </header>
     );
