@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#ScoreHeader {
+  margin-bottom: 0;
+}
+
+.label-row {
+  display: flex;
+}
+
+.imgSize {
+  width: 37px;
+  height: 37px;
+}
+
+.imgSizeFeedback {
+  width: 213px;
+  height: 213px;
+  /* position: absolute;*/
+  top: -159px;
+}
+
+.imgSizelogo {
+  width: 180px;
+  height: 180px;
+  top: -351px;
+}

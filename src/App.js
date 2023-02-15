@@ -6,6 +6,7 @@ import Feedback from './pages/Feedback';
 import Game from './pages/Game';
 import Ranking from './pages/Ranking';
 import Settings from './pages/Settings';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   render() {

@@ -3,10 +3,17 @@
   box-sizing: border-box;
 } */
 
-.correct {
+#correct {
   border: 3px solid rgb(6, 240, 15);
+  /* border-radius: 10px; */
 }
 
-.wrong {
+#wrong {
   border: 3px solid red;
+  /* border-radius: 10px; */
+}
+
+.game {
+  background-color: #ffffff;
+  min-height: 576px;
 }

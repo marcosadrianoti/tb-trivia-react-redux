@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Gear } from 'react-bootstrap-icons';
 import { LoginAct } from '../redux/actions';
+import '../styles/Login.css';
+import LogoTipo from '../images/logoTrivia.png';
 
 class Login extends Component {
   state = {
@@ -53,46 +56,63 @@ class Login extends Component {
   render() {
     const { disabled } = this.state;
     return (
-      <form>
-        <input
-          data-testid="input-gravatar-email"
-          placeholder="Insira o seu email"
-          name="emailValue"
-          onChange={ this.handleChange }
-        />
-        <input
-          data-testid="input-player-name"
-          placeholder="Insira o seu nome"
-          onChange={ this.handleChange }
-          name="nameValue"
-        />
+      <div className="d-flex flex-column align-items-center">
+        <img src={ LogoTipo } alt="Logotipo" className="logotipo" />
+        <form>
+          <div className="form-floating mb-3 w-100">
+            <input
+              data-testid="input-gravatar-email"
+              placeholder="Email"
+              name="emailValue"
+              id="emailValue"
+              className="form-control"
+              onChange={ this.handleChange }
+            />
+            <label htmlFor="emailValue">Email</label>
+          </div>
 
-        <button
-          type="button"
-          data-testid="btn-play"
-          disabled={ disabled }
-          onClick={ this.handleClick }
-        >
-          Play
+          <div className="form-floating mb-3 w-100">
+            <input
+              data-testid="input-player-name"
+              placeholder="Nome"
+              name="nameValue"
+              id="nameValue"
+              className="form-control"
+              onChange={ this.handleChange }
+            />
+            <label htmlFor="nameValue">Nome</label>
+          </div>
 
-        </button>
-        <div>
+          <button
+            type="button"
+            data-testid="btn-play"
+            disabled={ disabled }
+            className="btn btn-success btn-play"
+            onClick={ this.handleClick }
+          >
+            Play
+
+          </button>
+          {/* <div> */}
 
           <Link to="/settings">
             <button
               type="button"
               data-testid="btn-settings"
+              className="btn btn-primary btn-settings"
               onClick={ () => {
                 const { history } = this.props;
                 history.push('/settings');
               } }
             >
+              <Gear size={ 16 } className="gear" />
               Configurações
             </button>
           </Link>
-        </div>
+          {/* </div> */}
 
-      </form>
+        </form>
+      </div>
     );
   }
 }

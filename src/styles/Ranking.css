@@ -1,0 +1,25 @@
+.ranking {
+  background-color: #fff;
+  min-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ranking::-webkit-scrollbar {
+  width: 0px;
+  background-color: transparent;
+}
+
+p {
+  margin: 0;
+}
+
+.score {
+  height: 100%;
+}
+
+.list-ranking {
+  min-width: 500px;
+}
