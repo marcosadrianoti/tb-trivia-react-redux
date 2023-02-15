@@ -1,15 +1,22 @@
-button#correct,
-button#wrong {
-  border-style: solid;
-  border-width: 3px;
+.btn-answer {
+  background-color: white;
+  border: 3px solid lightgray;
+  border-radius: 20px;
+  height: 40px;
 }
 
-button#correct {
-  border-color: rgb(6, 240, 15);
+.correct {
+  background-color: lightgreen;
+  border: 3px solid rgb(6, 240, 15);
+  border-radius: 20px;
+  height: 40px;
 }
 
-button#wrong {
-  border-color: red;
+.wrong {
+  background-color: lightcoral;
+  border: 3px solid red;
+  border-radius: 20px;
+  height: 40px;
 }
 
 .game {

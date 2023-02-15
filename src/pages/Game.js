@@ -129,7 +129,7 @@ class Game extends Component {
     return (
 
       answers && (
-        <div className="d-flex flex-column align-items-center rounded w-50 p-5 game">
+        <div className="d-flex flex-column align-items-center rounded w-100 p-5 game">
           <Header />
           <main className="d-flex flex-column align-items-center">
             <Timer />
@@ -166,8 +166,9 @@ class Game extends Component {
                       key={ index }
                       type="button"
                       disabled={ timeIsOver }
-                      id={ (clickedAnswer || timeIsOver) && dataID.split('-')[0] }
-                      className="m-1 w-100 btn btn-outline-secondary"
+                      className={ (clickedAnswer || timeIsOver)
+                        ? `m-1 w-100 btn-answer ${dataID.split('-')[0]}`
+                        : 'm-1 w-100 btn-answer' }
                       data-testid={ dataID }
                       onClick={ this.clickedAnswer }
                     >

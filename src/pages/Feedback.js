@@ -14,7 +14,7 @@ class Feedback extends Component {
     const feedback = true;
     const { assertions, score, history } = this.props;
     return (
-      <div className="d-flex flex-column align-items-center rounded w-50 p-5 feedback">
+      <div className="d-flex flex-column align-items-center rounded w-75 p-5 feedback">
         <Header feedback={ feedback } />
         <p data-testid="feedback-text">{ this.message(assertions) }</p>
         <label htmlFor="score" className="d-flex flex-column align-items-center">

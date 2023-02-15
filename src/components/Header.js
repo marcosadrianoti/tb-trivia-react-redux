@@ -35,6 +35,7 @@ class Header extends Component {
               <p
                 data-testid="header-player-name"
                 id="ScoreHeader"
+                className="d-flex justify-content-center"
                 name="player"
               >
                 {name}

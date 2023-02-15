@@ -14,10 +14,10 @@ class Ranking extends Component {
     return (
       <main
         className="d-flex flex-column align-items-center \
-        rounded w-50 p-5 ranking"
+        rounded w-100 p-5 ranking"
       >
         <h1 data-testid="ranking-title">Ranking</h1>
-        <ol className="d-flex flex-column align-items-center w-100 p-0 list-ranking">
+        <ol className="d-flex flex-column align-items-center w-75 p-0 list-ranking">
           { ranking.map((player, index) => (
             <li
               key={ index }
