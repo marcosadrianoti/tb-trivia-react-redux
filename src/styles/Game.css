@@ -1,18 +1,18 @@
-#correct,
-#wrong {
-  border-width: 3px;
+butto#correct, 
+butto#wrong {
   border-style: solid;
+  border-width: 3px;
 }
 
-#correct {
+butto#correct {
   border-color: rgb(6, 240, 15);
 }
 
-#wrong {
+butto#wrong {
   border-color: red;
 }
 
 .game {
-  background-color: #ffffff;
+  background-color: white;
   min-height: 576px;
 }
