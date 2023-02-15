@@ -1,15 +1,15 @@
 .ranking {
-  background-color: #fff;
-  min-width: 400px;
+  background-color: white;
   max-height: 80vh;
+  min-width: 400px;
   overflow-y: auto;
-  scrollbar-width: none;
   -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .ranking::-webkit-scrollbar {
-  width: 0px;
   background-color: transparent;
+  width: 0px;
 }
 
 p {
