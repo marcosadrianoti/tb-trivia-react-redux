@@ -29,7 +29,6 @@ class Timer extends Component {
   timer = () => {
     const oneSecond = 1000;
     const { timeOver, time, currentTimer } = this.props;
-    console.log('entrou');
     this.setState({
       seconds: currentTimer,
     }, () => {

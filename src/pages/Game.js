@@ -133,8 +133,14 @@ class Game extends Component {
           <Header />
           <main>
             <Timer />
-            <h5 data-testid="question-text">{questions[currentQuestion].question}</h5>
-            <h5 data-testid="question-category">{questions[currentQuestion].category}</h5>
+            <h5 data-testid="question-text">{questions[currentQuestion]?.question}</h5>
+            <h5
+              data-testid="question-category"
+            >
+              {questions[currentQuestion]
+                ?.category}
+
+            </h5>
             <section data-testid="answer-options">
               {
                 answers.map((answer, index) => {
