@@ -43,7 +43,14 @@ class Header extends Component {
             <label htmlFor="score" className="d-flex align-items-center column-gap-2 ">
               <StarFill className="align-self-center text-warning fs-5" />
               Score:
-              <p data-testid="header-score" name="score">{ score } className="m-0"</p>
+              <p
+                data-testid="header-score"
+                id="ScoreHeader"
+                name="score"
+                className="m-0"
+              >
+                { score }
+              </p>
             </label>
           </header>
         ) : (
