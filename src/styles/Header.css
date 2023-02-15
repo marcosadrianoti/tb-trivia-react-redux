@@ -12,19 +12,18 @@
 }
 
 .imgSize {
-  width: 37px;
   height: 37px;
+  width: 37px;
 }
 
 .imgSizeFeedback {
-  width: 213px;
   height: 213px;
-  /* position: absolute;*/
+  width: 213px;
   top: -159px;
 }
 
 .imgSizelogo {
-  width: 180px;
   height: 180px;
+  width: 180px;
   top: -351px;
 }
