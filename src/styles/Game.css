@@ -1,12 +1,18 @@
+#correct,
+#wrong {
+  border-width: 3px;
+  border-style: solid;
+}
+
 #correct {
-  border: 3px solid rgb(6, 240, 15);
+  border-color: rgb(6, 240, 15);
 }
 
 #wrong {
-  border: 3px solid red;
+  border-color: red;
 }
 
 .game {
-  background-color: white;
+  background-color: #ffffff;
   min-height: 576px;
 }
