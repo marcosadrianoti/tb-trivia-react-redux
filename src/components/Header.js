@@ -6,23 +6,24 @@ import './Header.css';
 
 class Header extends Component {
   state = {
-    name: '',
-    score: 0,
+    // name: '',
+    // score: 0,
     gravatarEmail: '',
   };
 
   componentDidMount() {
-    const { email, score, name } = this.props;
+    const { email } = this.props;
     const hash = md5(email).toString();
     this.setState({
       gravatarEmail: hash,
-      score,
-      name,
+      // score,
+      // name,
     });
   }
 
   render() {
-    const { name, score, gravatarEmail } = this.state;
+    const { gravatarEmail } = this.state;
+    const { name, score } = this.props;
     return (
       <header>
         <img src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="profile-user" data-testid="header-profile-picture" />
