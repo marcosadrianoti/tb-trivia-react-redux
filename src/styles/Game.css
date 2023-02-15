@@ -1,12 +1,25 @@
-/* .correct,
-.wrong {
-  box-sizing: border-box;
-} */
+.btn-answer {
+  background-color: white;
+  border: 3px solid lightgray;
+  border-radius: 20px;
+  height: 40px;
+}
 
 .correct {
+  background-color: lightgreen;
   border: 3px solid rgb(6, 240, 15);
+  border-radius: 20px;
+  height: 40px;
 }
 
 .wrong {
+  background-color: lightcoral;
   border: 3px solid red;
+  border-radius: 20px;
+  height: 40px;
+}
+
+.game {
+  background-color: white;
+  min-height: 576px;
 }

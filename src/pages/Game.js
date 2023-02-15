@@ -129,19 +129,29 @@ class Game extends Component {
     return (
 
       answers && (
-        <div>
+        <div className="d-flex flex-column align-items-center rounded w-100 p-5 game">
           <Header />
-          <main>
+          <main className="d-flex flex-column align-items-center">
             <Timer />
-            <h5 data-testid="question-text">{questions[currentQuestion]?.question}</h5>
+            <h5
+              data-testid="question-text"
+              className="text-center"
+            >
+              {questions[currentQuestion]?.question}
+
+            </h5>
             <h5
               data-testid="question-category"
+              className="text-center"
             >
               {questions[currentQuestion]
                 ?.category}
 
             </h5>
-            <section data-testid="answer-options">
+            <section
+              data-testid="answer-options"
+              className="d-flex flex-column align-items-center w-100 container-answer"
+            >
               {
                 answers.map((answer, index) => {
                   if (answer === correctAnswer) {
@@ -157,7 +167,8 @@ class Game extends Component {
                       type="button"
                       disabled={ timeIsOver }
                       className={ (clickedAnswer || timeIsOver)
-                        ? dataID.split('-')[0] : '' }
+                        ? `m-1 w-100 btn-answer ${dataID.split('-')[0]}`
+                        : 'm-1 w-100 btn-answer' }
                       data-testid={ dataID }
                       onClick={ this.clickedAnswer }
                     >
@@ -174,6 +185,7 @@ class Game extends Component {
                   type="button"
                   data-testid="btn-next"
                   onClick={ this.handleNext }
+                  className="btn btn-primary w-50 m-3"
                 >
                   Next
                 </button>

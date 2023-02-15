@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+label p {
+  margin: 0;
+}
+
+.label-row {
+  display: flex;
+}
+
+.imgSize {
+  height: 37px;
+  width: 37px;
+}
+
+.imgSizeFeedback {
+  height: 213px;
+  top: -159px;
+  width: 213px;
+}
+
+.imgSizelogo {
+  height: 180px;
+  top: -351px;
+  width: 180px;
+}

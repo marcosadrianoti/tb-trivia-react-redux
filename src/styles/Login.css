@@ -1,0 +1,44 @@
+body {
+  align-items: center;
+  background-image: url('../images/background.png');
+  background-size: 100vw 100vh;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.logotipo {
+  height: 231px;
+  width: 230px;
+}
+
+form {
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 333px;
+  padding: 30px;
+  width: 60vw;
+}
+
+.btn-play {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  width: 200px;
+}
+
+.btn-settings {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  width: 200px;
+}
+
+.gear {
+  margin-right: 6px;
+}

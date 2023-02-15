@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { ClockFill } from 'react-bootstrap-icons';
 import { TimeIsOver, GetTime } from '../redux/actions';
+import '../styles/Timer.css';
 
 class Timer extends Component {
   constructor(props) {
@@ -57,9 +59,19 @@ class Timer extends Component {
   render() {
     const { currentTimer } = this.props;
     return (
-      <label htmlFor="timer" className="label-row">
-        Timer:
-        <h4>
+      <label htmlFor="timer" className="d-flex align-items-center mb-3">
+        {/* Timer: */}
+        <h4
+          className="
+            rounded-circle
+            p-2 timer d-flex
+            align-items-center
+            text-light
+            column-gap-2
+            fs-1
+            "
+        >
+          <ClockFill className="fs-3" />
           {currentTimer}
         </h4>
       </label>
@@ -80,8 +92,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   timeOver: (payload) => dispatch(TimeIsOver(payload)),
   time: (payload) => dispatch(GetTime(payload)),
-  clickedAnswerFunc: (payload) => dispatch(ClickedAnswer(payload)),
-  resetTimer: (payload) => dispatch(ResetTimer(payload)),
 });
 
 Timer.propTypes = {
