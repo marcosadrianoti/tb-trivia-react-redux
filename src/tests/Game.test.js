@@ -6,6 +6,7 @@ import Feedback from '../pages/Feedback';
 import App from '../App';
 import {API_LOGIN, API_QUESTIONS} from './helpers/APIsResult';
 import { useStore } from 'react-redux';
+import { addToRanking } from '../Helpers/funcLocal';
 
 describe('Testando a página Game', () => {
   afterEach(() => {
@@ -92,6 +93,15 @@ describe('Testando a página Game', () => {
 
           const timer = await screen.findByRole('heading', { level: 4 });
           expect(timer.innerHTML).toBe('30');
+
+          // await waitFor(() => {
+          //   expect(timer.innerHTML).toBe('29');
+          // }, {timeout:3000 , interval: 1000});
+
+          // await waitFor(() => {
+          //   expect(timer.innerHTML).toBe('28');
+          // }, {timeout:3000 , interval: 1000});
+
           await waitFor(() => {
             expect(timer.innerHTML).toBe('27');
           }, {timeout:3000 , interval: 1000});
@@ -265,10 +275,53 @@ describe('Testando a página Game', () => {
       await waitFor(() => {
         expect( history.location.pathname ).toBe('/feedback');
       })
-      // const totalScore = await screen.findByTestId('feedback-total-score');
-      // await waitFor(() => {
-      //   expect(totalScore.innerHTML).toBe('210')
 
-      // })
+      const rankingBtn = screen.getByTestId('btn-ranking');
+      await waitFor(() => {
+        expect(rankingBtn).toBeInTheDocument();
+        userEvent.click(rankingBtn);
+      })
+
+      const local = localStorage.getItem('Ranking', JSON.stringify(initialState.player));
+      expect(local).toBe('[{\"name\":\"Bruno\",\"assertions\":0,\"score\":0,\"gravatarEmail\":\"bruno@gmail.com\"}]');
+
+      const player2 = {name: 'jazin', assertions: 1, score: 70, gravatarEmail: 'jazin@email.com'};
+
+      const newRanking = addToRanking(player2, local);
+      // console.log(newRanking);
+      // localStorage.setItem('Ranking', JSON.stringify(newRanking));
+
+      const local2 = localStorage.getItem('Ranking');
+      expect(local2).toBe((newRanking));
+
+      // if (local) {
+      //   const ranking = JSON.parse(local);
+      //   const newRanking = [...ranking, player];
+      //   localStorage.setItem('Ranking', JSON.stringify(newRanking));
+      // } else {
+      //   const playerList = [initialState.player];
+      //   localStorage.setItem('Ranking', JSON.stringify(playerList));
+      // }
+
+
+
+      expect( history.location.pathname ).toBe('/ranking');
+
+      const rankingTitle = screen.getByTestId('ranking-title');
+      expect(rankingTitle).toBeInTheDocument();
+    })
+    it('testando ranking no localStorage', async () => {
+
+      const player = {name: 'João', score: 100};
+      const existingRanking = [{name: 'Maria', score: 200}, {name: 'Pedro', score: 150}];
+      localStorage.setItem('Ranking', JSON.stringify(existingRanking));
+
+      const ranking = JSON.parse(localStorage.getItem('Ranking'));
+      const newRanking = [...ranking, player];
+      localStorage.setItem('Ranking', JSON.stringify(newRanking));
+
+      const updatedRanking = JSON.parse(localStorage.getItem('Ranking'));
+      expect(updatedRanking).toEqual([...existingRanking, player]);
+
     })
   });
