@@ -61,6 +61,7 @@ class Timer extends Component {
     return (
       <label htmlFor="timer" className="d-flex align-items-center mb-3">
         {/* Timer: */}
+        <ClockFill className="fs-3" />
         <h4
           className="
             rounded-circle
@@ -71,7 +72,6 @@ class Timer extends Component {
             fs-1
             "
         >
-          <ClockFill className="fs-3" />
           {currentTimer}
         </h4>
       </label>

@@ -73,6 +73,23 @@ class Header extends Component {
                 {name}
               </p>
             </label>
+            <label
+              htmlFor="score"
+              className="d-flex
+              align-items-center
+              column-gap-2
+              invisible"
+            >
+              Score:
+              <p
+                data-testid="header-score"
+                id="ScoreHeader"
+                name="score"
+                className="m-0"
+              >
+                { score }
+              </p>
+            </label>
           </header>
         )}
       </div>

@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Timer from '../components/Timer';
 import '../styles/Game.css';
 import { SaveScore, ClickedAnswer, TimeIsOver, GetTime } from '../redux/actions';
+import { addScore, addToRanking } from '../Helpers/funcLocal';
 
 class Game extends Component {
   state = {
@@ -46,9 +47,7 @@ class Game extends Component {
     if (currentQuestion + 1 === maxQuestions) {
       const local = localStorage.getItem('Ranking', JSON.stringify(player));
       if (local) {
-        const ranking = JSON.parse(local);
-        const newRanking = [...ranking, player];
-        localStorage.setItem('Ranking', JSON.stringify(newRanking));
+        addToRanking(player, local);
       } else {
         const playerList = [player];
         localStorage.setItem('Ranking', JSON.stringify(playerList));
@@ -76,23 +75,7 @@ class Game extends Component {
     if (answer === correctAnswer) {
       const { difficulty } = this.state;
       const { time, player: { score, assertions } } = this.props;
-      const basePontuation = 10;
-      const hardPontuation = 3;
-      const mediumPontuation = 2;
-      const easyPontuation = 1;
-      let difficultValue = 0;
-      if (difficulty === 'hard') {
-        difficultValue = hardPontuation;
-      }
-      if (difficulty === 'medium') {
-        difficultValue = mediumPontuation;
-      }
-      if (difficulty === 'easy') {
-        difficultValue = easyPontuation;
-      }
-      const totalAssertions = assertions + 1;
-      const scoreToAdd = basePontuation + (time * difficultValue);
-      const newScore = score + scoreToAdd;
+      const { totalAssertions, newScore } = addScore(difficulty, time, score, assertions);
       saveScore({ assertions: totalAssertions, score: newScore });
     }
   };

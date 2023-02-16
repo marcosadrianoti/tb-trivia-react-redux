@@ -14,7 +14,7 @@ describe("Loading tests", () => {
     userEvent.type(nameInput, "testname");
     expect(nameInput.value).toBe("testname");
   });
-  
+
   test("Test email input", () => {
     renderWithRouterAndRedux(<App />);
     const emailInput = screen.getByTestId("input-gravatar-email");
@@ -40,7 +40,8 @@ describe("Loading tests", () => {
     const playButton = screen.getByTestId("btn-play");
     expect(playButton).toBeInTheDocument();
     expect(playButton).toBeEnabled();
-    userEvent.click(playButton);
+    await waitFor(() => userEvent.click(playButton));
+
     await waitFor(() => expect(history.location.pathname).toBe('/game'));
   });
 });
