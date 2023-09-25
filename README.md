@@ -1,4 +1,4 @@
-# Projeto Trivia! :currency_exchange:
+# Projeto Trivia! :question:
 Projeto desenvolvido por mim durante o curso de Desenvolvimento Web na Trybe. Divulgado aqui como portfólio de aprendizado.
 
 <details>
