@@ -4,10 +4,7 @@ Projeto desenvolvido por mim durante o curso de Desenvolvimento Web na Trybe. Di
 <details>
 <summary><strong>Objetivos do projeto:</strong></summary>
 
-  * Desenvolver uma carteira de controle de gastos com conversor de moedas, o usuário deverá ser capaz de:
-    * Adicionar, remover e editar um gasto.
-    * Visualizar uma tabelas com seus gastos.
-    * Visualizar o total de gastos convertidos para uma moeda de escolha.
+  * Desenvolver um jogo de perguntas e respostas baseado no jogo Trivia utilizando `React` e `Redux`, desenvolvendo em grupo suas funcionalidades de acordo com as demandas definidas em um quadro Kanban.
   * Verificar se eu era capaz de:
     * Criar um `store Redux` em aplicações `React`.
     * Criar `reducers` no Redux em aplicações `React`.
